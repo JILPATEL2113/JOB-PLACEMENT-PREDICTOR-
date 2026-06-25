@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Job Placement Predictor</title>
+    <!-- Tailwind CSS for Premium UI -->
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <style>
+        /* Smooth animation for result card */
+        .fade-in { animation: fadeIn 0.5s ease-in-out forwards; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+    </style>
+</head>
+<body class="bg-gradient-to-br from-slate-900 via-indigo-950 to-slate-900 min-h-screen text-slate-100 flex items-center justify-center p-4 antialiased">
+
+    <div class="w-full max-w-3xl bg-slate-800/60 backdrop-blur-md rounded-2xl p-6 md:p-8 shadow-2xl border border-slate-700/50">
+        
+        <!-- Header -->
+        <div class="text-center mb-8">
+            <h1 class="text-3xl font-extrabold tracking-tight bg-gradient-to-r from-blue-400 to-indigo-400 bg-clip-text text-transparent">
+                Job Placement Predictor
+            </h1>
+            <p class="text-slate-400 mt-2 text-sm md:text-base">Student data fill karein aur placement ke chances check karein.</p>
+        </div>
+
+        <!-- Form -->
+        <form id="predictionForm" class="space-y-6">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                
+                <!-- Gender -->
+                <div>
+                    <label class="block text-sm font-medium text-slate-300 mb-2">Gender</label>
+                    <select name="gender" class="w-full bg-slate-900/80 border border-slate-700 rounded-lg p-2.5 text-slate-200 focus:ring-2 focus:ring-indigo-500 focus:outline-none">
+                        <option value="1">Male</option>
+                        <option value="0">Female</option>
+                    </select>
+                </div>
+
+                <!-- Work Experience -->
+                <div>
+                    <label class="block text-sm font-medium text-slate-300 mb-2">Work Experience</label>
+                    <select name="work_experience" class="w-full bg-slate-900/80 border border-slate-700 rounded-lg p-2.5 text-slate-200 focus:ring-2 focus:ring-indigo-500 focus:outline-none">
+                        <option value="0">No Experience</option>
+                        <option value="1">Has Experience</option>
+                    </select>
+                </div>
+
+                <!-- SSC % -->
+                <div>
+                    <label class="block text-sm font-medium text-slate-300 mb-2">10th (SSC) Percentage</label>
+                    <input type="number" step="0.01" name="ssc_percentage" required placeholder="e.g. 75.5" class="w-full bg-slate-900/80 border border-slate-700 rounded-lg p-2.5 text-slate-200 focus:ring-2 focus:ring-indigo-500 focus:outline-none">
+                </div>
+
+                <!-- HSC % -->
+                <div>
+                    <label class="block text-sm font-medium text-slate-300 mb-2">12th (HSC) Percentage</label>
+                    <input type="number" step="0.01" name="hsc_percentage" required placeholder="e.g. 68.0" class="w-full bg-slate-900/80 border border-slate-700 rounded-lg p-2.5 text-slate-200 focus:ring-2 focus:ring-indigo-500 focus:outline-none">
+                </div>
+
+                <!-- HSC Stream -->
+                <div>
+                    <label class="block text-sm font-medium text-slate-300 mb-2">12th Specialisation (Stream)</label>
+                    <select name="hsc_subject" class="w-full bg-slate-900/80 border border-slate-700 rounded-lg p-2.5 text-slate-200 focus:ring-2 focus:ring-indigo-500 focus:outline-none">
+                        <option value="1">Commerce</option>
+                        <option value="2">Science</option>
+                        <option value="0">Arts</option>
+                    </select>
+                </div>
+
+                <!-- Degree % -->
+                <div>
+                    <label class="block text-sm font-medium text-slate-300 mb-2">Graduation Degree %</label>
+                    <input type="number" step="0.01" name="degree_percentage" required placeholder="e.g. 72.0" class="w-full bg-slate-900/80 border border-slate-700 rounded-lg p-2.5 text-slate-200 focus:ring-2 focus:ring-indigo-500 focus:outline-none">
+                </div>
+
+                <!-- Undergrad Type -->
+                <div>
+                    <label class="block text-sm font-medium text-slate-300 mb-2">Undergrad Field</label>
+                    <select name="undergrad_degree" class="w-full bg-slate-900/80 border border-slate-700 rounded-lg p-2.5 text-slate-200 focus:ring-2 focus:ring-indigo-500 focus:outline-none">
+                        <option value="2">Sci & Tech</option>
+                        <option value="0">Comm & Mgmt</option>
+                        <option value="1">Others</option>
+                    </select>
+                </div>
+
+                <!-- Employability Test % -->
+                <div>
+                    <label class="block text-sm font-medium text-slate-300 mb-2">Aptitude Test Score %</label>
+                    <input type="number" step="0.01" name="emp_test_percentage" required placeholder="e.g. 85.0" class="w-full bg-slate-900/80 border border-slate-700 rounded-lg p-2.5 text-slate-200 focus:ring-2 focus:ring-indigo-500 focus:outline-none">
+                </div>
+
+                <!-- MBA Stream -->
+                <div>
+                    <label class="block text-sm font-medium text-slate-300 mb-2">MBA Specialisation</label>
+                    <select name="specialisation" class="w-full bg-slate-900/80 border border-slate-700 rounded-lg p-2.5 text-slate-200 focus:ring-2 focus:ring-indigo-500 focus:outline-none">
+                        <option value="0">Mkt & Fin</option>
+                        <option value="1">Mkt & HR</option>
+                    </select>
+                </div>
+
+                <!-- MBA % -->
+                <div>
+                    <label class="block text-sm font-medium text-slate-300 mb-2">MBA Percentage</label>
+                    <input type="number" step="0.01" name="mba_percent" required placeholder="e.g. 65.4" class="w-full bg-slate-900/80 border border-slate-700 rounded-lg p-2.5 text-slate-200 focus:ring-2 focus:ring-indigo-500 focus:outline-none">
+                </div>
+
+            </div>
+
+            <!-- Submit Button -->
+            <button type="submit" class="w-full bg-gradient-to-r from-blue-500 to-indigo-600 hover:from-blue-600 hover:to-indigo-700 text-white font-semibold p-3 rounded-lg shadow-lg hover:shadow-indigo-500/20 transition-all duration-200 cursor-pointer text-center">
+                Predict Placement Status
+            </button>
+        </form>
+
+        <!-- Result Box (Hidden by default) -->
+        <div id="resultBox" class="hidden mt-8 p-5 rounded-xl border fade-in text-center">
+            <h3 class="text-lg font-medium text-slate-300">Prediction Result:</h3>
+            <p id="resultText" class="text-3xl font-black mt-2 tracking-wide"></p>
+        </div>
+
+    </div>
+
+    <!-- JavaScript to Handle API Call -->
+    <script>
+        document.getElementById('predictionForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            
+            const formData = new FormData(e.target);
+            // Form data ko JSON object me convert karna (numbers parsing ke sath)
+            const data = {
+                gender: parseInt(formData.get('gender')),
+                ssc_percentage: parseFloat(formData.get('ssc_percentage')),
+                hsc_percentage: parseFloat(formData.get('hsc_percentage')),
+                hsc_subject: parseInt(formData.get('hsc_subject')),
+                degree_percentage: parseFloat(formData.get('degree_percentage')),
+                undergrad_degree: parseInt(formData.get('undergrad_degree')),
+                work_experience: parseInt(formData.get('work_experience')),
+                emp_test_percentage: parseFloat(formData.get('emp_test_percentage')),
+                specialisation: parseInt(formData.get('specialisation')),
+                mba_percent: parseFloat(formData.get('mba_percent'))
+            };
+
+            const resultBox = document.getElementById('resultBox');
+            const resultText = document.getElementById('resultText');
+
+            try {
+                // FastAPI ke /predict endpoint par hit karna
+                const response = await fetch('/predict', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(data)
+                });
+                
+                const result = await response.json();
+                
+                // Result UI update karna
+                resultBox.classList.remove('hidden');
+                resultText.innerText = result.prediction;
+
+                if (result.prediction === "Placed") {
+                    resultBox.className = "mt-8 p-5 rounded-xl border border-emerald-500/30 bg-emerald-500/10 text-emerald-400 fade-in text-center";
+                } else {
+                    resultBox.className = "mt-8 p-5 rounded-xl border border-rose-500/30 bg-rose-500/10 text-rose-400 fade-in text-center";
+                }
+
+            } catch (error) {
+                alert("API connect karne me dikkat aayi!");
+                console.error(error);
+            }
+        });
+    </script>
+</body>
+</html>
